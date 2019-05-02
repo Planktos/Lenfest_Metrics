@@ -1,6 +1,6 @@
 # Import data
 
-in.dir <- list.files(path = "data", full.names = T, pattern = "matrices")
+in.dir <- list.files(path = "data", full.names = T, pattern = "matrices", recursive = T)
 dir.create("data/synthesis")
 
 tiff("data/synthesis/synthesis.tiff")
@@ -25,9 +25,9 @@ real.mat <- matrix(NA, ncol = length(scen.csv), nrow = 1000)
 for (j in 1:length(scen.csv)) {
   perc.inc[j] <- as.numeric(strsplit(strsplit(scen.csv[j],"_")[[1]][5],".csv")[[1]])
   mat. <- read.csv(scen.csv[j], header = T)
-  
+
   for (k in 3:dim(mat.)[2]) { real.mat[k-2,j] <- mat.[ext.ind[1],k] }
-  
+
 }
 
 real.mat <- real.mat[,order(perc.inc)]
